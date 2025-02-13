@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.46/moment-timezone-with-data-1970-2030.min.js"></script>
+    <title>Time zone dropdown</title>
+  </head>
+  <body>
+    <label for="city-select">Choose a city</label>
+    <select name="select-city" id="city-select">
+      <option value="">Select a city</option>
+      <option value="Asia/Tehran">🇮🇷Tehran</option>
+      <option value="America/New_York">🇺🇸New York</option>
+      <option value="Europe/London">🇬🇧London</option>
+    </select>
+    <script>
+      function displaySelectedCity(event) {
+        let selectedTimezone = event.target.value;
+        if (selectedTimezone.length > 0) {
+          let currentDate = moment
+            .tz(selectedTimezone)
+            .format("dddd, MMMM D, YYYY h:mm A");
+          alert(
+            `The current time in ${
+              event.target.options[event.target.selectedIndex].text
+            } is: ${currentDate}`
+          );
+        }
+      }
+
+      let citySelectElement = document.querySelector("#city-select");
+      citySelectElement.addEventListener("change", displaySelectedCity);
+    </script>
+  </body>
+</html>
